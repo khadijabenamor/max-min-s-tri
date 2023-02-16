@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <label>saisir un entier</label> <input type="number" id="x" onchange="traiter()"><br>
+  <p id="tab"></p>
+  <p id="min"></p>
+  <p id="max"></p>
+  <p id="somme"></p>
+  <p id="tri"></p>    
+
+<script>
+let t=[],x,min,max,s,aux;
+function traiter()
+{ 
+  x=document.getElementById("x").value;
+  t.push(x);
+  document.getElementById("tab").innerHTML ="Tableau : "+ t.toString();
+  if (t.length==1)
+  {
+      min=t[0];
+      max=t[0];
+      s=t[0];
+  }
+  else
+  {
+    if(min>x)
+      min=x;
+    if(max<x)
+      max=x;
+    s+=x;
+
+  }
+  
+  document.getElementById("min").innerHTML ="min : "+ min;
+  document.getElementById("max").innerHTML ="max : "+ max;
+  document.getElementById("s").innerHTML ="somme : "+ s;
+  
+  
+  
+
+
+  
+}
+
+
+</script>
+
+</body>
+</html>
+
