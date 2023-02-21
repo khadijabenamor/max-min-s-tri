@@ -1,25 +1,90 @@
 <!DOCTYPE html>
 <html>
 <body>
+   
+    tour:<p id="tour"></p>
+    score1:<p id="s1"></p>
+    score2:<p id="s2"></p>
+    <table>
+        <tr>
+            <td><img src="back.png" id="0" width="200" height="350" onclick="reverse(event)"></td>
+            <td><img src="back.png" id="1" width="200" height="350" onclick="reverse(event)"></td>
+            <td><img src="back.png" id="2" width="200" height="350" onclick="reverse(event)"></td>
+        </tr>
+        <tr>
+            <td><img src="back.png" id="3" width="200" height="350" onclick="reverse(event)"></td>
+            <td><img src="back.png" id="4" width="200" height="350" onclick="reverse(event)"></td>
+            <td><img src="back.png" id="5" width="200" height="350" onclick="reverse(event)"></td>
+        </tr>
+    </table>
     <script>
-        t=['papillon.jpg','chat.jpg','rose.png','rose.png','papillon.jpg','chat.jpg'];
+        let tirage=0,id1,id2;
+        let tour="j1",s1=0,s2=0;
+        photos=['papillon.jpg','chat.jpg','rose.png'];
+        rep=[0,0,0];
+        t=[];
+        document.getElementById("tour").innerHTML="j1";
+        document.getElementById("s1").innerHTML="0";
+        document.getElementById("s2").innerHTML="0";
+        reset();
         function reverse(e)
         {
             document.getElementById(e.target.id).src=t[e.target.id];
+            tirage ++;
+            if(tirage==1)
+             id1=e.target.id;
+            else
+            {
+                id2=e.target.id;
+                if(t[id1]!=t[id2])
+                {
+                    setTimeout(reset2cards,3000);
+                   
+                }
+                else
+                {
+                    if(tour=="j1")
+                    {
+                      s1++;
+                      document.getElementById("s1").innerHTML=s1;
+                    }
+                    else
+                    {
+                      s2++;
+                      document.getElementById("s2").innerHTML=s2;
+                    }
+                    
+                }
+                tirage=0;
+
+            }
+            
         }
-       
+        function reset2cards()
+        {
+            document.getElementById(id1).src="back.png";
+            document.getElementById(id2).src="back.png";
+            if(tour=="j1")
+                tour="j2";
+            else
+                tour="j1";
+            document.getElementById("tour").innerHTML=tour;
+        }
+        function reset()
+        {
+            let i=0;
+            while(i<6)
+            {
+                let tir=Math.floor(Math.random() * 3);
+                if(rep[tir]<2)
+                {
+                    t.push(photos[tir]);
+                    rep[tir]++;
+                    i++;
+                }
+            }
+           
+        }
     </script>
-    <table>
-        <tr>
-            <td><img src="back.png" id="0" width="100" height="370" onclick="reverse(event)"></td>
-            <td><img src="back.png" id="1" width="100" height="370" onclick="reverse(event)"></td>
-            <td><img src="back.png" id="2" width="100" height="370" onclick="reverse(event)"></td>
-        </tr>
-        <tr>
-            <td><img src="back.png" id="3" width="100" height="370" onclick="reverse(event)"></td>
-            <td><img src="back.png" id="4" width="100" height="370" onclick="reverse(event)"></td>
-            <td><img src="back.png" id="5" width="100" height="370" onclick="reverse(event)"></td>
-        </tr>
-    </table>
 </body>
 </html>
